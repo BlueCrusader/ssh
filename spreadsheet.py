@@ -21,5 +21,10 @@ class SpreadSheet:
                 return int(value[1:])
             elif value.startswith("='") and value.endswith("'"):
                 return value[2:-1]
+            else:
+                # Evaluate reference to another cell
+                reference = value[1:]
+                if reference in self._cells:
+                    return self.evaluate(reference)
         return "#Error"
 
