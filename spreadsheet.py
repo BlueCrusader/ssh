@@ -16,6 +16,10 @@ class SpreadSheet:
             return int(value)
         elif value.startswith("'") and value.endswith("'"):
             return value[1:-1]
-        else:
-            return "#Error"
+        elif value.startswith("="):
+            if value[1:].isdigit():
+                return int(value[1:])
+            elif value.startswith("='") and value.endswith("'"):
+                return value[2:-1]
+        return "#Error"
 
