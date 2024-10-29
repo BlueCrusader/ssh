@@ -57,5 +57,39 @@ class TestSpreadSheet(TestCase):
         spreadsheet.set("B2", "=A1")
         self.assertEqual("#Circular", spreadsheet.evaluate("A1"))
 
+    def test_simple_formulas_with_calculations_sums(self):
+        spreadsheet = SpreadSheet()
+        spreadsheet.set("A1", "=1+3")
+        self.assertEqual(4, spreadsheet.evaluate("A1"))
+
+    def test_simple_formulas_with_calculations_invalid_sums(self):
+        spreadsheet = SpreadSheet()
+        spreadsheet.set("A1", "=1+3.5")
+        self.assertEqual("#Error", spreadsheet.evaluate("A1"))
+
+    def test_simple_formulas_with_calculations_division(self):
+        spreadsheet = SpreadSheet()
+        spreadsheet.set("A1", "=8/2")
+        self.assertEqual(4, spreadsheet.evaluate("A1"))
+
+    def test_simple_formulas_with_calculations_invalid_divide_by_Zero(self):
+        spreadsheet = SpreadSheet()
+        spreadsheet.set("A1", "=1/0")
+        self.assertEqual("#Error", spreadsheet.evaluate("A1"))
+
+    def test_simple_formulas_with_calculations_multiplication(self):
+        spreadsheet = SpreadSheet()
+        spreadsheet.set("A1", "=2*2")
+        self.assertEqual(4, spreadsheet.evaluate("A1"))
+
+    #def test_simple_formulas_with_calculations_sum_and_multiplication(self):
+    #    spreadsheet = SpreadSheet()
+    #    spreadsheet.set("A1", "=1+3*2")
+    #    self.assertEqual(7, spreadsheet.evaluate("A1"))
+
+
+
+
+
 
 

@@ -26,6 +26,24 @@ class SpreadSheet:
                 result = int(value[1:])
             elif value.startswith("='") and value.endswith("'"):
                 result = value[2:-1]
+            elif '+' in value:
+                parts = value[1:].split('+')
+                if all(part.isdigit() for part in parts):
+                    result = sum(int(part) for part in parts)
+                else:
+                    result = "#Error"
+            elif '/' in value:
+                parts = value[1:].split('/')
+                if all(part.isdigit() for part in parts) and int(parts[1]) != 0:
+                    result = int(parts[0]) // int(parts[1])
+                else:
+                    result = "#Error"
+            elif '*' in value:
+                parts = value[1:].split('*')
+                if all(part.isdigit() for part in parts):
+                    result = int(parts[0]) * int(parts[1])
+                else:
+                    result = "#Error"
             else:
                 # Evaluate reference to another cell
                 reference = value[1:]
